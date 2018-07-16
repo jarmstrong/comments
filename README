@@ -1,0 +1,15 @@
+commentssdk
+- CommentClient // Entry point for the SDK end-user.
+- api/CommentService // Retrofit API service interface
+- models/Comment // Model for the REST API's comment json
+- CommentBroadcastReceiver // Triggers by AlarmManager, starts CommentIntentService
+- CommentIntentService // Performs API call, logs. Handles errors.
+
+app
+- Includes commentssdk, starts it on app open to demo functionality
+
+Issues / features would resolve with more time:
+
+* I think the wakelock can be lost before the API call completes in the service if it runs slowly. 
+A solution I found was to use a WakefulBroadcastReceiver, however this is deprecated in API 26.1.0+. Alternatives that work through dozemode might include GCM?
+* Simple methods for the SDK end-user to restart, or cancel the comment log service.

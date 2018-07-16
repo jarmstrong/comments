@@ -9,15 +9,13 @@ import android.util.Log;
 
 import java.util.List;
 
-import interview.com.commentssdk.api.CommentService;
-import interview.com.commentssdk.models.Comment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CommentIntentService extends IntentService implements Callback<List<Comment>> {
+class CommentIntentService extends IntentService implements Callback<List<Comment>> {
     private static final String TAG = "CommentIntentService";
 
     public CommentIntentService() {

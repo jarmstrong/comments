@@ -1,14 +1,16 @@
 comments
 ========
 
-commentssdk
-* `CommentClient` Entry point for the SDK end-user
-* `api/CommentService` Retrofit API service interface
-* `models/Comment Model` for the REST API's comment json
-* `CommentBroadcastReceiver` // Triggers by AlarmManager, starts CommentIntentService
-* `CommentIntentService` // Performs API call, logs. Handles errors.
+Simple Android module to pull comments from an API at a set interval.
 
-app
+*commentssdk*
+* `CommentClient` Entry point for the SDK end-user
+* `CommentService` Retrofit API service interface
+* `Comment` Model for the REST API's comment json
+* `CommentBroadcastReceiver` Triggers by AlarmManager, starts CommentIntentService
+* `CommentIntentService` Performs API call, logs. Handles errors.
+
+*app*
 - Includes `commentssdk` as library module, starts on app open to demo functionality
 
 Issues / features would resolve with more time:

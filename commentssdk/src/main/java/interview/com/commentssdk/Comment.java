@@ -1,4 +1,4 @@
-package interview.com.commentssdk.models;
+package interview.com.commentssdk;
 
 public class Comment {
     private int postId;

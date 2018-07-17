@@ -17,6 +17,7 @@ class CommentIntentService extends IntentService {
         super(TAG);
     }
 
+    // TODO: Test this presenter implementation
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         CommentService commentService = new RemoteCommentService();

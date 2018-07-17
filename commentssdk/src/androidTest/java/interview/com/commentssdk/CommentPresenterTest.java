@@ -28,12 +28,6 @@ public class CommentPresenterTest {
     @Mock
     private CommentContract.View view;
 
-    // TODO: Don't need?
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
-
     @Test
     public void fetchValidDataShouldLoadIntoView() {
         List<Comment> commentResponse = Arrays.asList(new Comment(0, 1, "", "", ""));
@@ -74,5 +68,26 @@ public class CommentPresenterTest {
         inOrder.verify(view, times(1)).onStarted();
         inOrder.verify(view, times(1)).onError(exception);
         verify(view, never()).onCompleted();
+    }
+
+    @Test
+    public void fetchValidData_ShouldRetrieve_And_IncrementCommentId() {
+        List<Comment> commentResponse = Arrays.asList(new Comment(0, 1, "", "", ""));
+
+        when(commentService.getCommentsById(1)).thenReturn(Observable.just(commentResponse));
+
+        SharedPreferencesRepo sharedPreferencesRepo = new MockSharedPreferencesRepoImpl();
+        SharedPreferencesRepo sharedPreferencesRepoSpy = Mockito.spy(sharedPreferencesRepo);
+
+        CommentPresenter commentPresenter = new CommentPresenter(
+                commentService,
+                sharedPreferencesRepoSpy,
+                Schedulers.immediate(),
+                Schedulers.immediate(),
+                view);
+
+        commentPresenter.nextComment();
+
+        verify(sharedPreferencesRepoSpy, times(1)).getCommentId();
     }
 }

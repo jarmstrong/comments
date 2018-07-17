@@ -3,7 +3,7 @@ package interview.com.comments;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import interview.com.commentssdk.CommentClient;
+import interview.com.commentssdk.Client;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CommentClient commentClient = new CommentClient(this);
-        commentClient.start();
+        Client client = new Client(this);
+        client.start();
     }
 }

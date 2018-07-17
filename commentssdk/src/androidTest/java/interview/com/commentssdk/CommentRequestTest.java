@@ -33,17 +33,6 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class CommentRequestTest {
-    @Mock
-    CommentService commentService;
-
-    @Mock
-    Call<List<Comment>> call;
-
-    @Spy
-    List<Comment> spyComments = new ArrayList<>();
-
-    @InjectMocks
-    CommentRequest commentRequest;
 
     @Test
     public void useAppContext() {
@@ -53,24 +42,5 @@ public class CommentRequestTest {
         assertEquals("interview.com.commentssdk.test", appContext.getPackageName());
     }
 
-    @Test
-    public void whenNextComment_GetsFirstElement() {
-        Mockito.when(commentService.getCommentById(1)).thenReturn(call);
 
-        Mockito.doAnswer(new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                Callback<List<Comment>> callback = invocation.getArgument(0);
-
-                spyComments.add(new Comment(0, 1, "James", "itsjarm@gmail.com", "test"));
-                callback.onResponse(call, Response.success(spyComments));
-
-                return null;
-            }
-        }).when(call).enqueue(any(Callback.class));
-
-        commentRequest.nextComment();
-
-        Mockito.verify(spyComments, times(1)).get(0);
-    }
 }
